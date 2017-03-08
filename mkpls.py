@@ -47,7 +47,7 @@ if __name__ == '__main__':
     page_url = 'https://www.vogelbescherming.nl/beleefdelente'
     resp = http.get(page_url)
     resp.raise_for_status()
-    soup = bs4.BeautifulSoup(resp.text, 'lxml')
+    soup = bs4.BeautifulSoup(resp.text, 'html.parser')
 
     print('#EXTM3U')
     print('#EXTINF:0, ABN AMRO: binnen')
