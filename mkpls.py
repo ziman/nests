@@ -26,7 +26,7 @@ def process_bird(http, title, page_url):
     log.info(page_url)
     resp = http.get(page_url)
     resp.raise_for_status()
-    soup = bs4.BeautifulSoup(resp.text, 'lxml')
+    soup = bs4.BeautifulSoup(resp.text, 'html.parser')
 
     for a in soup.select('ul[role=tablist] a[role=tab]'):
         if not a.get('data-file'):
