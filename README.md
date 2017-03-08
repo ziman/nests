@@ -6,7 +6,7 @@ A small commandline wrapper to create M3U playlists of bird nest streams
 
 ```{bash}
 # install bs4 and requests if you don't have them yet
-pip3 install bs4 requests
+pip3 install --user bs4 requests
 
 # generate playlist and run VLC
 ./runvlc.sh
