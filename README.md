@@ -2,6 +2,11 @@
 
 A small commandline wrapper to create M3U playlists of bird nest streams
 
+## Data sources
+
+* Peregrine falcons on the ABN AMRO building in Amsterdam
+* https://www.vogelbescherming.nl/beleefdelente
+
 ## Usage
 
 ```{bash}
