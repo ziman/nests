@@ -22,7 +22,7 @@ def process_player(http, title, page_url):
     print('#EXTINF:0,', title)
     print(doc['data'])
 
-def process_bird(http, title, page_url):
+def process_bird(http, orig_title, page_url):
     log.info(page_url)
     resp = http.get(page_url)
     resp.raise_for_status()
@@ -34,7 +34,7 @@ def process_bird(http, title, page_url):
 
         process_player(
             http,
-            title + ': ' + a['title'],
+            '[%s] %s' % (a['title'].strip(), orig_title),
             urljoin(
                 page_url,
                 a['data-file'],
