@@ -28,27 +28,36 @@ def process_bird(http, orig_title, page_url):
     resp.raise_for_status()
     soup = bs4.BeautifulSoup(resp.text, 'html.parser')
 
-    for a in soup.select('ul[role=tablist] a[role=tab]'):
-        if not a.get('data-file'):
-            continue
+    divs = soup('div', id='vue')
+    if not divs:
+        return
+    else:
+        items = json.loads(divs[0]['data-cams'])
 
+    SAMPLE_ITEM = {
+        "naam": "Binnencam",
+        "mediaid": "media8",
+        "order": 10,
+        "url": "bosuil1",
+        "file": "//rrr.sz.xlcdn.com/?account=bdl&file=bosuil1&type=live&service=wowza&output=player&autostart=1",
+        "id": 8,
+        "vogel": 22,
+        "actief": 1
+    }
+
+    for item in items:
         process_player(
             http,
-            '[%s] %s' % (a['title'].strip(), orig_title),
+            '[%s] %s' % (item['naam'].strip(), orig_title),
             urljoin(
                 page_url,
-                a['data-file'],
+                item['file'],
             )
         )
 
 if __name__ == '__main__':
     http = requests.Session()
     
-    page_url = 'https://www.vogelbescherming.nl/beleefdelente'
-    resp = http.get(page_url)
-    resp.raise_for_status()
-    soup = bs4.BeautifulSoup(resp.text, 'html.parser')
-
     print('#EXTM3U')
     print('#EXTINF:0, ABN AMRO: binnen')
     print('http://91.142.248.190:1935/live/binnen/playlist.m3u8')
@@ -56,6 +65,11 @@ if __name__ == '__main__':
     print('http://91.142.248.190:1935/live/buiten/playlist.m3u8')
     print('#EXTINF:0, ABN AMRO: buiten2')
     print('http://91.142.248.190:1935/live/buiten2/playlist.m3u8')
+
+    page_url = 'https://www.vogelbescherming.nl/beleefdelente'
+    resp = http.get(page_url)
+    resp.raise_for_status()
+    soup = bs4.BeautifulSoup(resp.text, 'html.parser')
 
     for a in soup('a', 'link-pijl'):
         process_bird(http, ' '.join(s.strip() for s in a.strings), urljoin(page_url, a['href']))
