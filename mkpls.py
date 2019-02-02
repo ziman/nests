@@ -60,11 +60,11 @@ if __name__ == '__main__':
     
     print('#EXTM3U')
     print('#EXTINF:0, ABN AMRO: binnen')
-    print('http://91.142.248.190:1935/live/binnen/playlist.m3u8')
+    print('http://streaming.avex.nl/live/valkbinnen/playlist.m3u8')
     print('#EXTINF:0, ABN AMRO: buiten')
-    print('http://91.142.248.190:1935/live/buiten/playlist.m3u8')
+    print('http://streaming.avex.nl/live/valkbuiten/playlist.m3u8')
     print('#EXTINF:0, ABN AMRO: buiten2')
-    print('http://91.142.248.190:1935/live/buiten2/playlist.m3u8')
+    print('http://streaming.avex.nl/live/valkbuiten2/playlist.m3u8')
 
     page_url = 'https://www.vogelbescherming.nl/beleefdelente'
     resp = http.get(page_url)
